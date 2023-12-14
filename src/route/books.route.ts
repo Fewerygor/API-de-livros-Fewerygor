@@ -7,7 +7,7 @@ export const booksRoute = Router();
 
 const booksController = new BooksController();
 
-booksRoute.post("/", IsbookAlreadyExist.execute, booksController.createBook);
+booksRoute.post("/", IsbookAlreadyExist.execute, booksController.postBook);
 booksRoute.get("/", booksController.getBook);
 booksRoute.get("/:id", IsBookValid.execute, booksController.getOneBook);
 booksRoute.patch("/:id", IsBookValid.execute, IsbookAlreadyExist.execute, booksController.updateBook);

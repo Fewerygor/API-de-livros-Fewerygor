@@ -4,7 +4,7 @@ import { BooksService } from "../service/books.service";
 export class BooksController {
   private booksService = new BooksService();
 
-  createBook = (req: Request, res: Response): Response => {
+  postBook = (req: Request, res: Response): Response => {
     const response = this.booksService.createBook(req.body);
 
     return res.status(201).json(response);
