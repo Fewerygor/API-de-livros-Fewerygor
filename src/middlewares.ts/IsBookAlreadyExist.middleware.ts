@@ -1,13 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import { booksDatabase } from "../database/database";
 import { AppError } from "../errors/AppErrors";
-import { IBook } from "../interface/books.interface";
+import { TBook } from "../interface/books.interface";
+
 
 export class IsbookAlreadyExist {
   static execute(req: Request, res: Response, next: NextFunction) {
     const { name } = req.body;
 
-    const nameExists: IBook | undefined = booksDatabase.find(
+    const nameExists: TBook | undefined = booksDatabase.find(
       (book) => book.name === name
     );
 

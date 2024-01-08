@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { booksDatabase } from "../database/database";
 import { AppError } from "../errors/AppErrors";
-import { IBook } from "../interface/books.interface";
+
 
 export class IsBookValid {
   static execute(req: Request, res: Response, next: NextFunction) {

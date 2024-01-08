@@ -1,9 +1,13 @@
 import { booksDatabase, generateId } from "../database/database";
-import { IBook, ICreateData, IUpdateData } from "../interface/books.interface";
+import {
+  TBook,
+  TCreateBookBody,
+  TEditBookBody,
+} from "../interface/books.interface";
 
 export class BooksService {
-  createBook(data: ICreateData): IBook {
-    const newBook: IBook = {
+  createBook(data: TCreateBookBody): TBook {
+    const newBook: TBook = {
       id: generateId(),
       ...data,
       createdAt: new Date(),
@@ -15,7 +19,10 @@ export class BooksService {
     return newBook;
   }
 
-  getBook() {
+  getBook(query: string) {
+    if (query) {
+      return booksDatabase.filter((book) => book.name.toLowerCase().includes(query));
+    }
     return booksDatabase;
   }
 
@@ -25,13 +32,13 @@ export class BooksService {
     return booksDatabase[index];
   }
 
-  updateBook(id: string, data: IUpdateData): IBook | undefined {
+  updateBook(id: string, data: TEditBookBody): TBook | undefined {
     const index = booksDatabase.findIndex((book) => book.id === Number(id));
 
     booksDatabase[index] = {
       ...booksDatabase[index],
       ...data,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     return booksDatabase[index];
